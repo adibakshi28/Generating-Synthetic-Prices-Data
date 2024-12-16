@@ -28,7 +28,7 @@ The primary objectives of this project include:
 ### Data Preparation
 1. Raw price data was cleaned to remove inconsistencies.
 2. Transformed into log returns:
-   - \(\text{Log Return} = \log(\frac{P_t}{P_{t-1}})\)
+   - $$ \text{Log Return} = \log\left(\frac{P_t}{P_{t-1}}\right) $$
    - Log returns offer mathematical convenience and stationarity for time-series modeling.
 
 ---
@@ -42,18 +42,15 @@ The primary objectives of this project include:
    - **ARIMA (Autoregressive Integrated Moving Average)**:
      - Combined autoregressive (\(AR\)) and moving average (\(MA\)) terms to model both linear dependencies and shocks in the data.
      - ARIMA(1, 0, 1) was applied to stationary log returns:
-       \[
-       X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t
-       \]
+       - \( X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t \)
+       - Here, \( \phi_1 \) and \( \theta_1 \) represent autoregressive and moving average components, respectively.
        where \(\phi_1\) and \(\theta_1\) capture autoregressive and moving average effects, respectively.
      - Residual diagnostics confirmed that residuals are white noise, ensuring the model’s validity for generating synthetic returns.
 
 #### **2. Volatility-Based Models**
    - **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**:
      - Captures time-varying volatility by estimating conditional variance:
-       \[
-       \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
-       \]
+        - $$ \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 $$
      - Successfully modeled volatility clustering observed in financial returns.
    - **GARCH with Student-t Distribution**:
      - Enhanced the basic GARCH model to account for heavy-tailed behavior in financial returns by using a Student-t distribution for residuals.
