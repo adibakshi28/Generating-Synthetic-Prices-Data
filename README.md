@@ -15,16 +15,12 @@ The primary objectives of this project include:
 2. **Synthetic Data Generation**: Developing models to generate synthetic return data that replicates real-world statistical properties.
 3. **Evaluation and Validation**: Assessing the fidelity of synthetic data using statistical metrics such as mean, variance, skewness, kurtosis, autocorrelation, and Kolmogorov-Smirnov statistics.
 
----
-
 ## Dataset
 - **Asset**: Bitcoin (BTC) hourly price data.
 - **Period**: January 2020 to November 2024 (37,080 rows).
 - **Transformation**: 
   - Log returns were used to ensure stationarity, scale invariance, and additive properties over time.
   - Returns typically follow a distribution closer to normality, simplifying modeling efforts.
-
----
 
 ## Methodology
 
@@ -37,8 +33,6 @@ The primary objectives of this project include:
      X_t = \log\left(\frac{P_t}{P_{t-1}}\right).
      \]
    - Using log returns enhances the stationarity of the time series and simplifies the handling of multiplicative effects.
-
----
 
 ### Synthetic Data Generation Techniques
 
@@ -97,8 +91,6 @@ The primary objectives of this project include:
      - **LSTM**: Identified complex non-linear temporal patterns.
    - Ensemble model effectively balanced overfitting and realism, producing highly accurate synthetic data.
 
----
-
 ## Evaluation Metrics
 1. **Moments Analysis**:
    - Compared mean, variance, skewness, and kurtosis of synthetic vs. real data.
@@ -148,5 +140,3 @@ The ensemble model, leveraging strengths from statistical, machine learning, and
    - Include macroeconomic variables and news events for scenario-specific stress testing.
 3. **Fourier-Deep Learning Hybrid**:
    - Combine Fourier-based methods with deep learning to enhance spectral and temporal synthesis.
-
----
