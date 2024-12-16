@@ -26,10 +26,7 @@ The primary objectives of this project include:
 
 1. **Data Cleaning**: Historical price data underwent rigorous cleaning procedures to remove outliers, missing values, and any irregularities that could introduce bias.
 2. **Transformation to Log Returns**:
-   - The transformation from prices \( P_t \) to log returns \( X_t \) is defined as:
-     \[
-     X_t = \log\left(\frac{P_t}{P_{t-1}}\right).
-     \]
+   - The transformation from prices $(P_t)$ to log returns $(X_t)$ is defined as: $X_t = \log\left(\frac{P_t}{P_{t-1}}\right)$.
    - Using log returns enhances the stationarity of the time series and simplifies the handling of multiplicative effects.
 
 ### Synthetic Data Generation Techniques
@@ -37,26 +34,17 @@ The primary objectives of this project include:
 #### 1. Traditional Statistical Models
 
 - **Autoregressive (AR)**:
-  - The AR model captures linear dependencies by expressing the current value \( X_t \) as a weighted sum of its past values:
-    \[
-    X_t = c + \phi_1 X_{t-1} + \epsilon_t.
-    \]
+  - The AR model captures linear dependencies by expressing the current value $X_t$ as a weighted sum of its past values: $X_t = c + \phi_1 X_{t-1} + \epsilon_t$.
   - Stationarity was confirmed using the Augmented Dickey-Fuller (ADF) test, which returned a highly negative test statistic (e.g., \(-32.75\)) and a \( p \)-value near 0.0, indicating strong evidence against the presence of a unit root.
 
 - **ARIMA (Autoregressive Integrated Moving Average)**:
-  - ARIMA models combine autoregressive and moving average components to address both linear dependencies and shocks:
-    \[
-    X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t.
-    \]
+  - ARIMA models combine autoregressive and moving average components to address both linear dependencies and shocks: $X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t$.
   - Applying ARIMA(1,0,1) to the stationary log returns, residual diagnostics indicated that the residuals approximated white noise, confirming model adequacy for generating synthetic returns.
 
 #### 2. Volatility-Based Models
 
 - **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**:
-  - GARCH models the conditional variance \(\sigma_t^2\) of the time series to capture volatility clustering:
-    \[
-    \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2.
-    \]
+  - GARCH models the conditional variance $\sigma_t^2$ of the time series to capture volatility clustering: $\sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2$.
 
 - **GARCH with Student-t Distribution**:
   - Incorporating a Student-t distribution for the residuals accounts for heavier tails and extreme market events. Parameter estimation confirmed significant volatility persistence and better alignment with observed return distributions.
