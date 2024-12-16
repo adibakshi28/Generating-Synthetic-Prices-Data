@@ -25,7 +25,9 @@ The primary objectives of this project include:
 ---
 
 ## Methodology
+
 ### Data Preparation
+
 1. Raw price data was cleaned to remove inconsistencies.
 2. Transformed into log returns:
    - $$ \text{Log Return} = \log\left(\frac{P_t}{P_{t-1}}\right) $$
@@ -36,32 +38,37 @@ The primary objectives of this project include:
 ### Synthetic Data Generation Techniques
 
 #### **1. Traditional Statistical Models**
-   - **Autoregressive (AR)**:
-     - Captures linear dependencies in time-series data by modeling the current value as a weighted sum of its past values.
-     - Stationarity was confirmed using the Augmented Dickey-Fuller (ADF) test with a highly negative test statistic (\(-32.75\)) and \(p\)-value of 0.0, indicating strong rejection of the null hypothesis of non-stationarity.
-   - **ARIMA (Autoregressive Integrated Moving Average)**:
-     - Combined autoregressive (\(AR\)) and moving average (\(MA\)) terms to model both linear dependencies and shocks in the data.
-     - ARIMA(1, 0, 1) was applied to stationary log returns:
-       - \( X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t \)
-       - Here, \( \phi_1 \) and \( \theta_1 \) represent autoregressive and moving average components, respectively.
-       where \(\phi_1\) and \(\theta_1\) capture autoregressive and moving average effects, respectively.
-     - Residual diagnostics confirmed that residuals are white noise, ensuring the model’s validity for generating synthetic returns.
+
+- **Autoregressive (AR)**:
+  - Captures linear dependencies in time-series data by modeling the current value as a weighted sum of its past values.
+  - Stationarity was confirmed using the Augmented Dickey-Fuller (ADF) test with a highly negative test statistic (\(-32.75\)) and \(p\)-value of 0.0, indicating strong rejection of the null hypothesis of non-stationarity.
+
+- **ARIMA (Autoregressive Integrated Moving Average)**:
+  - Combines autoregressive (\(AR\)) and moving average (\(MA\)) terms to model both linear dependencies and shocks in the data.
+  - ARIMA(1, 0, 1) was applied to stationary log returns:
+    - $$ X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t $$
+    - Here, \( \phi_1 \) and \( \theta_1 \) represent autoregressive and moving average components, respectively.
+  - Residual diagnostics confirmed that residuals are white noise, ensuring the model’s validity for generating synthetic returns.
 
 #### **2. Volatility-Based Models**
-   - **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**:
-     - Captures time-varying volatility by estimating conditional variance:
-        - $$ \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 $$
-     - Successfully modeled volatility clustering observed in financial returns.
-   - **GARCH with Student-t Distribution**:
-     - Enhanced the basic GARCH model to account for heavy-tailed behavior in financial returns by using a Student-t distribution for residuals.
-     - Fitted model parameters indicated significant persistence of volatility.
-   - **GARCH with LSTM Hybrid**:
-     - Combined GARCH with a Long Short-Term Memory (LSTM) network to capture non-linear and temporal patterns in volatility dynamics.
-     - LSTM was trained on sequences of past conditional volatilities, improving predictive accuracy.
-   - **GJR-GARCH (Glosten-Jagannathan-Runkle GARCH)**:
-     - Extended the GARCH framework to include the leverage effect:
-       - Negative shocks disproportionately increased volatility compared to positive shocks of the same magnitude.
-     - This asymmetry was modeled using an indicator function to adjust the conditional variance.
+
+- **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**:
+  - Captures time-varying volatility by estimating conditional variance:
+    - $$ \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 $$
+  - Successfully modeled volatility clustering observed in financial returns.
+
+- **GARCH with Student-t Distribution**:
+  - Enhances the basic GARCH model to account for heavy-tailed behavior in financial returns by using a Student-t distribution for residuals.
+  - Fitted model parameters indicated significant persistence of volatility.
+
+- **GARCH with LSTM Hybrid**:
+  - Combines GARCH with a Long Short-Term Memory (LSTM) network to capture non-linear and temporal patterns in volatility dynamics.
+  - The LSTM was trained on sequences of past conditional volatilities, improving predictive accuracy.
+
+- **GJR-GARCH (Glosten-Jagannathan-Runkle GARCH)**:
+  - Extends the GARCH framework to include the leverage effect:
+    - Negative shocks disproportionately increase volatility compared to positive shocks of the same magnitude.
+  - This asymmetry is modeled using an indicator function to adjust the conditional variance.
 
 #### **3. Fourier Transform Models**
    - **Fourier Transform with Randomized Phases**:
