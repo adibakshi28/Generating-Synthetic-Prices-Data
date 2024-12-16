@@ -28,54 +28,61 @@ The primary objectives of this project include:
 
 ### Data Preparation
 
-1. Raw price data was cleaned to remove inconsistencies.
-2. Transformed into log returns:
-   - $$ \text{Log Return} = \log\left(\frac{P_t}{P_{t-1}}\right) $$
-   - Log returns offer mathematical convenience and stationarity for time-series modeling.
+1. **Data Cleaning**: Historical price data underwent rigorous cleaning procedures to remove outliers, missing values, and any irregularities that could introduce bias.
+2. **Transformation to Log Returns**:
+   - The transformation from prices \( P_t \) to log returns \( X_t \) is defined as:
+     \[
+     X_t = \log\left(\frac{P_t}{P_{t-1}}\right).
+     \]
+   - Using log returns enhances the stationarity of the time series and simplifies the handling of multiplicative effects.
 
 ---
 
 ### Synthetic Data Generation Techniques
 
-#### **1. Traditional Statistical Models**
+#### 1. Traditional Statistical Models
 
 - **Autoregressive (AR)**:
-  - Captures linear dependencies in time-series data by modeling the current value as a weighted sum of its past values.
-  - Stationarity was confirmed using the Augmented Dickey-Fuller (ADF) test with a highly negative test statistic (\(-32.75\)) and \(p\)-value of 0.0, indicating strong rejection of the null hypothesis of non-stationarity.
+  - The AR model captures linear dependencies by expressing the current value \( X_t \) as a weighted sum of its past values:
+    \[
+    X_t = c + \phi_1 X_{t-1} + \epsilon_t.
+    \]
+  - Stationarity was confirmed using the Augmented Dickey-Fuller (ADF) test, which returned a highly negative test statistic (e.g., \(-32.75\)) and a \( p \)-value near 0.0, indicating strong evidence against the presence of a unit root.
 
 - **ARIMA (Autoregressive Integrated Moving Average)**:
-  - Combines autoregressive (\(AR\)) and moving average (\(MA\)) terms to model both linear dependencies and shocks in the data.
-  - ARIMA(1, 0, 1) was applied to stationary log returns:
-    - $$ X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t $$
-    - Here, \( \phi_1 \) and \( \theta_1 \) represent autoregressive and moving average components, respectively.
-  - Residual diagnostics confirmed that residuals are white noise, ensuring the model’s validity for generating synthetic returns.
+  - ARIMA models combine autoregressive and moving average components to address both linear dependencies and shocks:
+    \[
+    X_t = c + \phi_1 X_{t-1} + \theta_1 \epsilon_{t-1} + \epsilon_t.
+    \]
+  - Applying ARIMA(1,0,1) to the stationary log returns, residual diagnostics indicated that the residuals approximated white noise, confirming model adequacy for generating synthetic returns.
 
-#### **2. Volatility-Based Models**
+#### 2. Volatility-Based Models
 
 - **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)**:
-  - Captures time-varying volatility by estimating conditional variance:
-    - $$ \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2 $$
-  - Successfully modeled volatility clustering observed in financial returns.
+  - GARCH models the conditional variance \(\sigma_t^2\) of the time series to capture volatility clustering:
+    \[
+    \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2.
+    \]
 
 - **GARCH with Student-t Distribution**:
-  - Enhances the basic GARCH model to account for heavy-tailed behavior in financial returns by using a Student-t distribution for residuals.
-  - Fitted model parameters indicated significant persistence of volatility.
+  - Incorporating a Student-t distribution for the residuals accounts for heavier tails and extreme market events. Parameter estimation confirmed significant volatility persistence and better alignment with observed return distributions.
 
 - **GARCH with LSTM Hybrid**:
-  - Combines GARCH with a Long Short-Term Memory (LSTM) network to capture non-linear and temporal patterns in volatility dynamics.
-  - The LSTM was trained on sequences of past conditional volatilities, improving predictive accuracy.
+  - An LSTM layer was integrated to model non-linear, complex temporal patterns in volatility dynamics.
+  - Training on sequences of past conditional volatilities improved predictive accuracy, resulting in more realistic synthetic volatility patterns.
 
 - **GJR-GARCH (Glosten-Jagannathan-Runkle GARCH)**:
-  - Extends the GARCH framework to include the leverage effect:
-    - Negative shocks disproportionately increase volatility compared to positive shocks of the same magnitude.
-  - This asymmetry is modeled using an indicator function to adjust the conditional variance.
+  - GJR-GARCH introduces an asymmetry term to capture leverage effects, where negative shocks increase volatility more than positive shocks of the same magnitude:
+    \[
+    \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \gamma I_{\{\epsilon_{t-1}<0\}}\epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2.
+    \]
 
-#### **3. Fourier Transform Models**
-   - **Fourier Transform with Randomized Phases**:
-     - Preserved the spectral (frequency-domain) properties of log returns while introducing randomness in the time domain.
-     - Applied the Fast Fourier Transform (FFT) to decompose the time series into magnitudes and phases.
-     - Original phases were replaced with uniformly distributed random phases, preserving power spectrum while disrupting temporal structure.
-     - Reconstructed synthetic returns via the Inverse FFT, ensuring the same frequency characteristics as the original data.
+#### 3. Fourier Transform Models
+
+- **Fourier Transform with Randomized Phases**:
+  - Applying the Fast Fourier Transform (FFT) decomposes the time series into frequency components.
+  - Randomizing the phase angles while preserving the power spectrum ensures that the synthetic data retain similar frequency-domain properties but differ in the time domain.
+  - Inverse FFT reconstruction yields synthetic series with identical spectral characteristics yet novel temporal sequences.
 
 #### **4. Combined Ensemble Model**
    - Merged outputs from:
