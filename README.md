@@ -7,8 +7,6 @@ This project explores the development of synthetic financial data generation tec
 
 <img src="ss/Price Plot.png" alt="Stat comp" style="width: 90%;">
 
----
-
 ## Objectives
 The primary objectives of this project include:
 1. **Data Preparation**: Cleaning and transforming raw financial data into log returns.
@@ -103,8 +101,6 @@ The primary objectives of this project include:
   
 <img src="ss/Stat comparision.png" alt="Stat comp" style="width: 90%;">
 
----
-
 ## Key Insights
 1. **Ensemble Models**:
    - Showed the best performance across all statistical metrics.
@@ -121,8 +117,6 @@ The primary objectives of this project include:
   <img src="ss/KS Metric.png" alt="Game Screenshot 2" style="width: 28% height: 70%;">
 </div>
 
----
-
 ## Results
 The ensemble model, leveraging strengths from statistical, machine learning, and Fourier-based techniques, produced synthetic datasets that closely matched real data's statistical and temporal characteristics. These datasets are suitable for:
 - Stress testing under extreme market conditions.
@@ -130,8 +124,6 @@ The ensemble model, leveraging strengths from statistical, machine learning, and
 - Risk metric evaluation for robust financial modeling.
 
 <img src="ss/Price Plot - Avg.png" alt="Game Screenshot 2" style="width: 90%;">
-
----
 
 ## Future Recommendations
 1. **Advanced Machine Learning Models**:
