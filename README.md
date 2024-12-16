@@ -125,8 +125,8 @@ The primary objectives of this project include:
    - ARIMA models performed well for capturing linear patterns but struggled with higher-order properties.
   
 <div style="display: flex; justify-content: space-between;">
-  <img src="ss/KS Stat.png" alt="Game Screenshot 1" style="width: 70%;">
-  <img src="ss/KS Metric.png" alt="Game Screenshot 2" style="width: 28% height: 75%;">
+  <img src="ss/KS Stat.png" alt="Game Screenshot 1" style="width: 60%;">
+  <img src="ss/KS Metric.png" alt="Game Screenshot 2" style="width: 28% height: 70%;">
 </div>
 
 ---
