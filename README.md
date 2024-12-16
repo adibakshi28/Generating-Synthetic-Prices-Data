@@ -5,6 +5,8 @@ This project explores the development of synthetic financial data generation tec
 
 [Access Project Code](https://colab.research.google.com/drive/1gstUw9FwKLSupvSCj6zTBJtORKYD8k5M?usp=sharing)
 
+<img src="ss/Price Plot.png" alt="Stat comp" style="width: 90%;">
+
 ---
 
 ## Objectives
@@ -106,6 +108,8 @@ The primary objectives of this project include:
    - Assessed the maximum difference between cumulative distributions of real and synthetic data.
 4. **Visual Comparisons**:
    - Plotted real vs. synthetic returns and prices for qualitative validation.
+  
+<img src="ss/Stat comparision.png" alt="Stat comp" style="width: 90%;">
 
 ---
 
@@ -119,6 +123,11 @@ The primary objectives of this project include:
    - Accurately replicated volatility clustering and heavy tails, critical for stress testing.
 4. **Traditional Models**:
    - ARIMA models performed well for capturing linear patterns but struggled with higher-order properties.
+  
+<div style="display: flex; justify-content: space-between;">
+  <img src="ss/KS Stat.png" alt="Game Screenshot 1" style="width: 48%;">
+  <img src="ss/KS Metric.png" alt="Game Screenshot 2" style="width: 48%;">
+</div>
 
 ---
 
@@ -128,10 +137,7 @@ The ensemble model, leveraging strengths from statistical, machine learning, and
 - Backtesting trading strategies with realistic data.
 - Risk metric evaluation for robust financial modeling.
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="ss/Stat comparision.png" alt="Stat comp" style="width: 90%;">
-</div>
-
+<img src="ss/Price Plot - Avg.png" alt="Game Screenshot 2" style="width: 90%;">
 
 ---
 
