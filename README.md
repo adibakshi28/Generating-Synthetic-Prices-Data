@@ -128,6 +128,11 @@ The ensemble model, leveraging strengths from statistical, machine learning, and
 - Backtesting trading strategies with realistic data.
 - Risk metric evaluation for robust financial modeling.
 
+<div style="display: flex; justify-content: space-between;">
+  <img src="ss/Stat comparision.png" alt="Stat comp" style="width: 90%;">
+</div>
+
+
 ---
 
 ## Future Recommendations
