@@ -67,9 +67,7 @@ The primary objectives of this project include:
 
 - **GJR-GARCH (Glosten-Jagannathan-Runkle GARCH)**:
   - GJR-GARCH introduces an asymmetry term to capture leverage effects, where negative shocks increase volatility more than positive shocks of the same magnitude:
-    $$
-    \sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \gamma I_{\{\epsilon_{t-1}<0\}}\epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2
-    $$
+    $\sigma_t^2 = \omega + \alpha_1 \epsilon_{t-1}^2 + \gamma I_{\{\epsilon_{t-1}<0\}}\epsilon_{t-1}^2 + \beta_1 \sigma_{t-1}^2$
 
 
 #### 3. Fourier Transform Models
