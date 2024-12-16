@@ -114,7 +114,6 @@ The primary objectives of this project include:
   
 <div style="display: flex; justify-content: space-between;">
   <img src="ss/KS Stat.png" alt="Game Screenshot 1" style="width: 50%;">
-  <img src="ss/KS Metric.png" alt="Game Screenshot 2" style="width: 28% height: 50%;">
 </div>
 
 ## Results
